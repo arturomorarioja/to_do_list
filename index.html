@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To Do List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>    
+<body>
+    <header>
+        <a id="showHelp">Help</a>
+        <h1>To Do List</h1>        
+    </header>
+    <main>
+        <header id="listHeaders">
+            <div id="toDoHeader" class="listHeader">To do</div>
+            <div id="ongoingHeader" class="listHeader">Ongoing</div>
+            <div id="doneHeader" class="listHeader">Done</div>
+        </header>
+        <main id="listContent">
+            <div id="toDoList" class="listColumn">
+                <a id="addTask">+</a>
+            </div>
+            <div id="ongoingList" class="listColumn"></div>
+            <div id="doneList" class="listColumn"></div>
+        </main>
+        <div id="currentTask" class="modal">
+            <textarea id="txtTask"></textarea><br>
+            <div class="buttons">
+                <input type="button" id="btnOk" value="Add">
+                <input type="button" id="btnCancel" value="Cancel">
+            </div>
+        </div>
+        <div id="help" class="modal">
+            <p id="helpText">
+                Add a new "to do" task by pressing the plus ("+") button.<br>
+                Move a task from one area to another ("to do", "ongoing", "done") by dragging and dropping it.
+            </p>
+            <div class="buttons">
+                <input type="button" id="btnClose" value="Close">
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2020 Arturo Mora-Rioja
+    </footer>
+</body>
+<script src="script.js"></script>
+</html>
