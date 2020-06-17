@@ -70,6 +70,12 @@ document.getElementById("btnOk").addEventListener("click", function() {
     const TASKTEXT = document.getElementById("txtTask");
     const CURRENTTASK = document.getElementById("currentTask");
     
+    if (TASKTEXT.value.trim() === "") {
+        alert("Please insert some text");
+        TASKTEXT.focus();
+        return false;
+    }
+
     if (this.value === ADDTASKTEXT) {       // Add a to do task
         
         // Create the task div
