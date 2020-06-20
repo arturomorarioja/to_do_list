@@ -9,9 +9,9 @@ const UPDATETASKTEXT = "Update";
 
 // These variables will be updated every time a task is added, edited, deleted, or if it switches lists.
 // They will be checked in the function resizeLists()
-var toDoListHeight = document.getElementById("toDoList").offsetHeight;
-var ongoingListHeight = 0;
-var doneListHeight = 0;
+let toDoListHeight = document.getElementById("toDoList").offsetHeight;
+let ongoingListHeight = 0;
+let doneListHeight = 0;
 
 // Value initialization on page load
 document.addEventListener("DOMContentLoaded", function() {    
@@ -79,7 +79,7 @@ document.getElementById("btnOk").addEventListener("click", function() {
     if (this.value === ADDTASKTEXT) {       // Add a to do task
         
         // Create the task div
-        var task = document.createElement("div");
+        const task = document.createElement("div");
 
         task.classList.add("task");
         task.classList.add("toDo");
@@ -92,7 +92,7 @@ document.getElementById("btnOk").addEventListener("click", function() {
         task.prepend(deleteButton());
 
         // Add to the to do list
-        let toDoList = document.getElementById("toDoList");
+        const toDoList = document.getElementById("toDoList");
         toDoList.prepend(task);
 
         // Recalculate list height
@@ -100,14 +100,13 @@ document.getElementById("btnOk").addEventListener("click", function() {
 
     } else {                                // Update task
         // Update the task div
-        var task = document.querySelector("div.task[taskid='" + CURRENTTASK.getAttribute("currentid") + "']");
+        const task = document.querySelector("div.task[taskid='" + CURRENTTASK.getAttribute("currentid") + "']");
         const PREVIOUSHEIGHT = task.offsetHeight;
         const CURRENTLISTNAME = task.parentNode.id;
 
         task.innerText = TASKTEXT.value;
         task.prepend(deleteButton());
         
-
         // Recalculate list height
         switch (CURRENTLISTNAME) {
             case "toDoList":
@@ -185,7 +184,7 @@ document.getElementById("toDoList").addEventListener("drop", function() {
     dropTask("toDo", this);
         
     // Move the add task button to the end
-    let addTask = document.getElementById("addTask");
+    const addTask = document.getElementById("addTask");
     toDoList.removeChild(addTask);
     toDoList.appendChild(addTask);        
 });
@@ -209,7 +208,7 @@ function dropTask(listName, list) {
     const TASKLIST = draggedTask.parentNode.id;
 
     if (TASKLIST !== (listName + "List")) {
-        let taskHeight = draggedTask.offsetHeight + 10;
+        const taskHeight = draggedTask.offsetHeight + 10;
         
         // Remove the task from its originary list
         draggedTask.parentNode.removeChild(draggedTask);
@@ -252,8 +251,10 @@ function dropTask(listName, list) {
  */
 function deleteButton() {
     const DELETEBUTTON = document.createElement("a");
+
     DELETEBUTTON.classList.add("deleteButton");
     DELETEBUTTON.addEventListener("click", deleteButtonClick);
+
     return (DELETEBUTTON);
 }
 
@@ -261,7 +262,7 @@ function deleteButton() {
  * It resizes the three lists and their container according to their current content
  */
 function resizeLists() {
-    var higherListHeight = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
+    const higherListHeight = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
 
     document.getElementById("toDoList").style.height = higherListHeight + "px";
     document.getElementById("ongoingList").style.height = higherListHeight + "px";
