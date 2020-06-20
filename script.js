@@ -164,7 +164,7 @@ document.getElementById("btnClose").addEventListener("keyup", function(e) {
 /*
     Drag and drop functionality
 */
-dragStart = function(e) {
+const dragStart = function(e) {
     e.dataTransfer.setData("text/plain", null);
     draggedTask = e.target;
 }
