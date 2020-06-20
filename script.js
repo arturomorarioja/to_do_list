@@ -89,6 +89,7 @@ document.getElementById("btnOk").addEventListener("click", function() {
         task.addEventListener("click", taskClick);
         task.setAttribute("draggable", "true");
         task.addEventListener("dragstart", dragStart);
+        task.prepend(deleteButton());
 
         // Add to the to do list
         let toDoList = document.getElementById("toDoList");
@@ -104,6 +105,8 @@ document.getElementById("btnOk").addEventListener("click", function() {
         const CURRENTLISTNAME = task.parentNode.id;
 
         task.innerText = TASKTEXT.value;
+        task.prepend(deleteButton());
+        
 
         // Recalculate list height
         switch (CURRENTLISTNAME) {
@@ -118,12 +121,6 @@ document.getElementById("btnOk").addEventListener("click", function() {
         }
     }
     resizeLists();
-    
-    // Add the delete button
-    const DELETEBUTTON = document.createElement("a");
-    DELETEBUTTON.classList.add("deleteButton");
-    DELETEBUTTON.addEventListener("click", deleteButtonClick);
-    task.prepend(DELETEBUTTON);
     
     // Clear and hide the modal
     TASKTEXT.value = "";
@@ -250,16 +247,21 @@ function dropTask(listName, list) {
 }
 
 /**
+ * It creates the delete button for a task
+ * @return The new delete button
+ */
+function deleteButton() {
+    const DELETEBUTTON = document.createElement("a");
+    DELETEBUTTON.classList.add("deleteButton");
+    DELETEBUTTON.addEventListener("click", deleteButtonClick);
+    return (DELETEBUTTON);
+}
+
+/**
  * It resizes the three lists and their container according to their current content
  */
 function resizeLists() {
-    var higherListHeight = toDoListHeight;
-    if (ongoingListHeight > higherListHeight) {
-        higherListHeight = ongoingListHeight;
-    }
-    if (doneListHeight > higherListHeight) {
-        higherListHeight = doneListHeight;
-    }
+    var higherListHeight = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
 
     document.getElementById("toDoList").style.height = higherListHeight + "px";
     document.getElementById("ongoingList").style.height = higherListHeight + "px";
