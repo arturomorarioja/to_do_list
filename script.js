@@ -79,44 +79,44 @@ document.getElementById("btnOk").addEventListener("click", function() {
     if (this.value === ADDTASKTEXT) {       // Add a to do task
         
         // Create the task div
-        const task = document.createElement("div");
+        const TASK = document.createElement("div");
 
-        task.classList.add("task");
-        task.classList.add("toDo");
-        task.innerText = TASKTEXT.value;
-        task.setAttribute("taskId", CURRENTTASK.getAttribute("currentid"));
+        TASK.classList.add("task");
+        TASK.classList.add("toDo");
+        TASK.innerText = TASKTEXT.value;
+        TASK.setAttribute("taskId", CURRENTTASK.getAttribute("currentid"));
         CURRENTTASK.setAttribute("lastid", parseInt(CURRENTTASK.getAttribute("lastid")) + 1);
-        task.addEventListener("click", taskClick);
-        task.setAttribute("draggable", "true");
-        task.addEventListener("dragstart", dragStart);
-        task.prepend(deleteButton());
+        TASK.addEventListener("click", taskClick);
+        TASK.setAttribute("draggable", "true");
+        TASK.addEventListener("dragstart", dragStart);
+        TASK.prepend(deleteButton());
 
         // Add to the to do list
         const toDoList = document.getElementById("toDoList");
-        toDoList.prepend(task);
+        toDoList.prepend(TASK);
 
         // Recalculate list height
-        toDoListHeight += (task.offsetHeight + 10);
+        toDoListHeight += (TASK.offsetHeight + 10);
 
     } else {                                // Update task
         // Update the task div
-        const task = document.querySelector("div.task[taskid='" + CURRENTTASK.getAttribute("currentid") + "']");
-        const PREVIOUSHEIGHT = task.offsetHeight;
-        const CURRENTLISTNAME = task.parentNode.id;
+        const TASK = document.querySelector("div.task[taskid='" + CURRENTTASK.getAttribute("currentid") + "']");
+        const PREVIOUSHEIGHT = TASK.offsetHeight;
+        const CURRENTLISTNAME = TASK.parentNode.id;
 
-        task.innerText = TASKTEXT.value;
-        task.prepend(deleteButton());
+        TASK.innerText = TASKTEXT.value;
+        TASK.prepend(deleteButton());
         
         // Recalculate list height
         switch (CURRENTLISTNAME) {
             case "toDoList":
-                toDoListHeight = toDoListHeight - PREVIOUSHEIGHT + task.offsetHeight;
+                toDoListHeight = toDoListHeight - PREVIOUSHEIGHT + TASK.offsetHeight;
                 break;                
             case "ongoingList":
-                ongoingListHeight = ongoingListHeight - PREVIOUSHEIGHT + task.offsetHeight;
+                ongoingListHeight = ongoingListHeight - PREVIOUSHEIGHT + TASK.offsetHeight;
                 break;                
             case "doneList":
-                doneListHeight = doneListHeight - PREVIOUSHEIGHT + task.offsetHeight;
+                doneListHeight = doneListHeight - PREVIOUSHEIGHT + TASK.offsetHeight;
         }
     }
     resizeLists();
@@ -184,9 +184,9 @@ document.getElementById("toDoList").addEventListener("drop", function() {
     dropTask("toDo", this);
         
     // Move the add task button to the end
-    const addTask = document.getElementById("addTask");
-    toDoList.removeChild(addTask);
-    toDoList.appendChild(addTask);        
+    const ADDTASK = document.getElementById("addTask");
+    toDoList.removeChild(ADDTASK);
+    toDoList.appendChild(ADDTASK);        
 });
 
 // Drop a task on the ongoing list
@@ -262,11 +262,11 @@ function deleteButton() {
  * It resizes the three lists and their container according to their current content
  */
 function resizeLists() {
-    const higherListHeight = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
+    const HIGHERLISTHEIGHT = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
 
-    document.getElementById("toDoList").style.height = higherListHeight + "px";
-    document.getElementById("ongoingList").style.height = higherListHeight + "px";
-    document.getElementById("doneList").style.height = higherListHeight + "px";
+    document.getElementById("toDoList").style.height = HIGHERLISTHEIGHT + "px";
+    document.getElementById("ongoingList").style.height = HIGHERLISTHEIGHT + "px";
+    document.getElementById("doneList").style.height = HIGHERLISTHEIGHT + "px";
     
-    document.getElementById("listContent").style.height = (higherListHeight + 20) + "px";
+    document.getElementById("listContent").style.height = (HIGHERLISTHEIGHT + 20) + "px";
 }
