@@ -15,8 +15,10 @@ let doneListHeight = 0;
 
 // Value initialization on page load
 document.addEventListener("DOMContentLoaded", function() {    
-    document.getElementById("currentTask").setAttribute("currentid", "");   // ID of the task being edited
-    document.getElementById("currentTask").setAttribute("lastid", "0");     // Highest task ID
+    const CURRENTTASK = document.getElementById("currentTask");
+
+    CURRENTTASK.setAttribute("currentid", "");   // ID of the task being edited
+    CURRENTTASK.setAttribute("lastid", "0");     // Highest task ID
 });
 
 // Edit a new task
@@ -230,7 +232,7 @@ function dropTask(listName, list) {
         draggedTask.classList.add(listName);
         list.appendChild(draggedTask);
 
-        // Done list resizing
+        // List resizing
         switch (listName) {
             case "toDo":
                 toDoListHeight += taskHeight;
