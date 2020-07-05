@@ -4,8 +4,11 @@
  * @author  Arturo Mora-Rioja (amri@kea.dk)
  * @version 1.0 June 2020
  */
-const ADDTASKTEXT = "Add";
-const UPDATETASKTEXT = "Update";
+"use strict";
+const addTaskText = "Add";
+const updateTaskText = "Update";
+const toDoList = document.getElementById("toDoList");
+let draggedTask = {};
 
 // These variables will be updated every time a task is added, edited, deleted, or if it switches lists.
 // They will be checked in the function resizeLists()
@@ -27,7 +30,7 @@ document.getElementById("addTask").addEventListener("click", function() {
     const NEWID = parseInt(CURRENTTASK.getAttribute("lastid")) + 1;
 
     document.getElementById("txtTask").value = "";
-    document.getElementById("btnOk").value = ADDTASKTEXT;
+    document.getElementById("btnOk").value = addTaskText;
     CURRENTTASK.setAttribute("currentid", NEWID);
     CURRENTTASK.style.display = "block";
     document.getElementById("txtTask").focus();
@@ -38,7 +41,7 @@ const taskClick = function() {
     const CURRENTTASK = document.getElementById("currentTask");
     const ID = parseInt(this.getAttribute("taskId"));
     
-    document.getElementById("btnOk").value = UPDATETASKTEXT;
+    document.getElementById("btnOk").value = updateTaskText;
     document.getElementById("txtTask").value = this.innerText;
     CURRENTTASK.setAttribute("currentid", ID);
     CURRENTTASK.style.display = "block";
@@ -78,7 +81,7 @@ document.getElementById("btnOk").addEventListener("click", function() {
         return false;
     }
 
-    if (this.value === ADDTASKTEXT) {       // Add a to do task
+    if (this.value === addTaskText) {       // Add a to do task
         
         // Create the task div
         const TASK = document.createElement("div");
@@ -93,8 +96,7 @@ document.getElementById("btnOk").addEventListener("click", function() {
         TASK.addEventListener("dragstart", dragStart);
         TASK.prepend(deleteButton());
 
-        // Add to the to do list
-        const toDoList = document.getElementById("toDoList");
+        // Add to the to do list        
         toDoList.prepend(TASK);
 
         // Recalculate list height
