@@ -212,7 +212,7 @@ function dropTask(listName, list) {
     const TASKLIST = draggedTask.parentNode.id;
 
     if (TASKLIST !== (listName + "List")) {
-        const taskHeight = draggedTask.offsetHeight + 10;
+        const TASKHEIGHT = draggedTask.offsetHeight + 10;
         
         // Remove the task from its originary list
         draggedTask.parentNode.removeChild(draggedTask);
@@ -221,15 +221,15 @@ function dropTask(listName, list) {
         switch (TASKLIST) {
             case "toDoList":
                 draggedTask.classList.remove("toDo");
-                toDoListHeight -= taskHeight;
+                toDoListHeight -= TASKHEIGHT;
                 break;
             case "ongoingList":
                 draggedTask.classList.remove("ongoing");            
-                ongoingListHeight -= taskHeight;
+                ongoingListHeight -= TASKHEIGHT;
                 break;
             case "doneList":
                 draggedTask.classList.remove("done");
-                doneListHeight -= taskHeight;
+                doneListHeight -= TASKHEIGHT;
         }
         draggedTask.classList.add(listName);
         list.appendChild(draggedTask);
@@ -237,13 +237,13 @@ function dropTask(listName, list) {
         // List resizing
         switch (listName) {
             case "toDo":
-                toDoListHeight += taskHeight;
+                toDoListHeight += TASKHEIGHT;
                 break;                
             case "ongoing":
-                ongoingListHeight += taskHeight;
+                ongoingListHeight += TASKHEIGHT;
                 break;                
             case "done":
-                doneListHeight += taskHeight;
+                doneListHeight += TASKHEIGHT;
         }
         resizeLists();
     }
