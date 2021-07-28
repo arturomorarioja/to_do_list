@@ -102,9 +102,9 @@ a#addTask {
 a#showHelp {
     display: block;
     float: right;
-    margin-right: 2rem;
-    padding: 0.25rem;
-    font-size: 1.4rem;    
+    margin-right: 1rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;    
 }
 a.deleteButton {
     display: block;
@@ -119,9 +119,9 @@ div.modal {
     display: none;
     position: fixed;
     z-index: 1;
-    top: 3rem;
+    top: 3.5rem;
     border: solid thick var(--colorPrimary);
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     padding: 0.25rem;
     width: 80%;
     height: 80%;
@@ -145,22 +145,25 @@ div#help {
     height: auto;
 }
 p#helpText {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 textarea#txtTask {
     width: 99%;
-    height: 88%;    
+    height: 92%;    
     resize: none;
     overflow: auto;
     border-color: var(--colorSecondary);
 }
 
 input[type="button"] {
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
     font-size: 1rem;
     font-weight: bold;
-    color: var(--colorPrimary);
+    border: none;
+    border-radius: 0.25rem;
+    color: var(--colorTextSecondary);
+    background-color: var(--colorPrimary);
     cursor: pointer;
 }
 div.buttons {
