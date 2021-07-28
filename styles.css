@@ -1,37 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
+
+:root {
+    --colorTextSecondary: floralwhite;
+
+    --colorPrimary: #20408A;
+    --colorSecondary: #6F737D;
+    --colorTertiary: #A9ABAE;
+
+    --colorToDo: lightsalmon;
+    --colorOngoing: palegoldenrod;
+    --colorDone: lightgreen;
+
+    --imgDelete: url(trash.png);
+}
+
 * {
-    margin: 0px;
+    margin: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
 }
 
 header {
-    padding: 10px 0 10px 10px;
-    color: floralwhite;
-    background-color: midnightblue;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    color: var(--colorTextSecondary);
+    background-color: var(--colorPrimary);
+}
+header > h1 {
+    text-indent: 2rem;   
 }
 
 main {
-    padding: 10px;
-    line-height: 1.4em;
+    padding: 0.5rem;
+    line-height: 1.4rem;
 }
 
 footer {
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
-    padding: 5px 0 5px 0;
-    color: floralwhite;
-    background-color: midnightblue;
+    padding: 0.25rem 0 0.25rem 0;
+    color: var(--colorTextSecondary);
+    background-color: var(--colorPrimary);
     text-align: center;
 }
 
 header#listHeaders {
-    color: midnightblue;
-    background-color: gainsboro;
-    font-weight: bold;
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: var(--colorPrimary);
+    background-color: var(--colorTertiary);
+    font-weight: bold;    
 }
 div#toDoHeader {
     float: left;
@@ -55,56 +75,58 @@ div#doneList {
 }
 
 main#listContent {
-    margin-bottom: 20px;
-    background-color: gray;
-    overflow: auto;
+    margin-bottom: 2rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding-right: 0;
+    background-color: var(--colorSecondary);
+    overflow: auto;    
 }
 
 a {
-    color: midnightblue;
-    background-color: floralwhite;
+    color: var(--colorPrimary);
+    background-color: var(--colorTextSecondary);
     text-align: center;    
-    border-radius: 5px;
+    border-radius: 0.25rem;
 }
 a:hover {
     cursor: pointer;
-    background-color: navajowhite
+    background-color: var(--colorTertiary);
 }
 a#addTask {
     display: inline-block;
     width: 95%;
-    border-radius: 10px;
-    font-size: 3em;
-    line-height: 0.8em;
+    border-radius: 0.25rem;
+    font-size: 3rem;
+    line-height: 2rem;
 }
 a#showHelp {
     display: block;
     float: right;
-    margin-right: 20px;
-    padding: 5px;
-    font-size: 1.4em;    
+    margin-right: 2rem;
+    padding: 0.25rem;
+    font-size: 1.4rem;    
 }
 a.deleteButton {
     display: block;
     float: right;
-    width: 24px;
-    height: 24px;
-    margin-left: 5px;
-    background-image: url(trash.png);
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.25rem;
+    background-image: var(--imgDelete);
 }
 
 div.modal {
     display: none;
     position: fixed;
     z-index: 1;
-    top: 60px;
-    border: solid thick midnightblue;
-    border-radius: 10px;
-    padding: 10px;
+    top: 3rem;
+    border: solid thick var(--colorPrimary);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
     width: 80%;
     height: 80%;
     left: 10%;
-    background-color: floralwhite;
+    background-color: var(--colorTextSecondary);
 }
 @media (min-width: 768px) {
     div#task {
@@ -123,7 +145,7 @@ div#help {
     height: auto;
 }
 p#helpText {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 }
 
 textarea#txtTask {
@@ -131,38 +153,38 @@ textarea#txtTask {
     height: 88%;    
     resize: none;
     overflow: auto;
-    border-color: lightgray;
+    border-color: var(--colorSecondary);
 }
 
 input[type="button"] {
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     font-weight: bold;
-    color: midnightblue;
+    color: var(--colorPrimary);
     cursor: pointer;
 }
 div.buttons {
-    padding-right: 40px;
+    padding-right: 2rem;
     text-align: right;
 }
 
 div.task {
-    border: thin solid midnightblue;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
+    border: thin solid var(--colorPrimary);
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem;
     width: 95%;
-    max-height: 200px;
+    max-height: 10rem;
     overflow: auto;
     word-wrap: break-word;
     cursor: pointer;
 }
 div.toDo {
-    background-color: lightsalmon;
+    background-color: var(--colorToDo);
 }
 div.ongoing {    
-    background-color: palegoldenrod;
+    background-color: var(--colorOngoing);
 }
 div.done {
-    background-color: lightgreen;
+    background-color: var(--colorDone);
 }
