@@ -11,7 +11,7 @@
     --colorOngoing: palegoldenrod;
     --colorDone: lightgreen;
 
-    --imgDelete: url(trash.png);
+    --imgDelete: url(../img/trash.png);
 }
 
 * {
