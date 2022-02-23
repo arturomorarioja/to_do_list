@@ -3,7 +3,8 @@
  * 
  * @author  Arturo Mora-Rioja (amri@kea.dk)
  * @version 1.0.0 June 2020
- * @version 1.0.1 July 2021 Code style improvements
+ * @version 1.0.1 July 2021     Code style improvements
+ * @version 1.0.2 February 2022 Refactoring
  */
 'use strict';
 const addTaskText = 'Add';
@@ -13,12 +14,12 @@ let draggedTask = {};
 
 // These variables will be updated every time a task is added, edited, deleted, or if it switches lists.
 // They will be checked in the function resizeLists()
-let toDoListHeight = document.getElementById('toDoList').offsetHeight;
+let toDoListHeight = toDoList.offsetHeight;
 let ongoingListHeight = 0;
 let doneListHeight = 0;
 
 // Value initialization on page load
-document.addEventListener('DOMContentLoaded', function() {    
+document.addEventListener('DOMContentLoaded', () => {    
     const currentTask = document.getElementById('currentTask');
 
     currentTask.setAttribute('currentid', '');   // ID of the task being edited
@@ -26,27 +27,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Edit a new task
-document.getElementById('addTask').addEventListener('click', function() {
+document.getElementById('addTask').addEventListener('click', () => {
     const currentTask = document.getElementById('currentTask');
-    const newID = parseInt(currentTask.getAttribute('lastid')) + 1;
+    const txtTask = document.getElementById('txtTask');
+    const newID = parseInt(currentTask.getAttribute('lastid')) + 1;    
 
-    document.getElementById('txtTask').value = '';
+    txtTask.value = '';
     document.getElementById('btnOk').value = addTaskText;
     currentTask.setAttribute('currentid', newID);
     currentTask.style.display = 'block';
-    document.getElementById('txtTask').focus();
+    txtTask.focus();
 });
 
 // Edit an existing task
 const taskClick = function() {
     const currentTask = document.getElementById('currentTask');
+    const txtTask = document.getElementById('txtTask');
     const ID = parseInt(this.getAttribute('taskId'));
     
     document.getElementById('btnOk').value = updateTaskText;
-    document.getElementById('txtTask').value = this.innerText;
+    txtTask.value = this.innerText;
     currentTask.setAttribute('currentid', ID);
     currentTask.style.display = 'block';
-    document.getElementById('txtTask').focus();
+    txtTask.focus();
 }
 
 // Delete a task
@@ -59,14 +62,9 @@ const deleteButtonClick = function(e) {
 
     // List height is recalculated
     switch (currentListName) {
-        case 'toDoList':
-            toDoListHeight -= taskHeight;
-            break;
-        case 'ongoingList':
-            ongoingListHeight -= taskHeight;
-            break;
-        case 'doneList':
-            doneListHeight -= taskHeight;
+        case 'toDoList':    toDoListHeight -= taskHeight;       break;
+        case 'ongoingList': ongoingListHeight -= taskHeight;    break;
+        case 'doneList':    doneListHeight -= taskHeight;       break;
     }
     resizeLists();
 }
@@ -82,8 +80,7 @@ document.getElementById('btnOk').addEventListener('click', function() {
         return false;
     }
 
-    if (this.value === addTaskText) {       // Add a to do task
-        
+    if (this.value === addTaskText) {       // Add a to do task        
         // Create the task div
         const task = document.createElement('div');
 
@@ -132,56 +129,38 @@ document.getElementById('btnOk').addEventListener('click', function() {
 });
 
 // Cancel task edition
-function cancelTaskEdition() {
+const cancelTaskEdition = () => {
     const currentTask = document.getElementById('currentTask');
     
     currentTask.setAttribute('currentid', '0');
     currentTask.style.display = 'none';
 }
-document.getElementById('btnCancel').addEventListener('click', function() {
-    cancelTaskEdition();
-});
-document.getElementById('txtTask').addEventListener('keyup', function(e) {
-    if (e.code === 'Escape') {
-        cancelTaskEdition();
-    }
-});
+document.getElementById('btnCancel').addEventListener('click', () => cancelTaskEdition());
+document.getElementById('txtTask').addEventListener('keyup', (e) => (e.code === 'Escape' ? cancelTaskEdition() : true));
 
 // Show help
-document.getElementById('showHelp').addEventListener('click', function() {
+document.getElementById('showHelp').addEventListener('click', () => {
     document.getElementById('help').style.display = 'block';
     document.getElementById('btnClose').focus();
 });
 
 // Close help
-function hideHelp() {
-    document.getElementById('help').style.display = 'none';
-}
-document.getElementById('btnClose').addEventListener('click', function() {
-    hideHelp();
-});
-document.getElementById('btnClose').addEventListener('keyup', function(e) {
-    if (e.code === 'Escape') {
-        hideHelp();
-    }
-});
+const hideHelp = () => document.getElementById('help').style.display = 'none';
+const btnClose = document.getElementById('btnClose');
+btnClose.addEventListener('click', hideHelp);
+btnClose.addEventListener('keyup', (e) => (e.code === 'Escape' ? hideHelp() : true));    
 
 /*
     Drag and drop functionality
 */
-const dragStart = function(e) {
+const dragStart = (e) => {
     e.dataTransfer.setData('text/plain', null);
     draggedTask = e.target;
 }
 
-document.getElementById('toDoList').addEventListener('dragover', function(e) {
-    e.preventDefault();
-});
-document.getElementById('ongoingList').addEventListener('dragover', function(e) {
-    e.preventDefault();
-});
-document.getElementById('doneList').addEventListener('dragover', function(e) {
-    e.preventDefault();
+// This affects toDoList, ongoingList and doneList
+document.querySelectorAll('.listColumn').forEach((list) => {
+    list.addEventListener('dragover', (e) => e.preventDefault());
 });
 
 // Drop a task on the to do list
@@ -209,7 +188,7 @@ document.getElementById('doneList').addEventListener('drop', function() {
  * @param listName Name of the target list
  * @param list     Target list div
  */
-function dropTask(listName, list) {
+const dropTask = (listName, list) => {
     const taskList = draggedTask.parentNode.id;
 
     if (taskList !== (listName + 'List')) {
@@ -231,20 +210,16 @@ function dropTask(listName, list) {
             case 'doneList':
                 draggedTask.classList.remove('done');
                 doneListHeight -= taskHeight;
+                break;
         }
         draggedTask.classList.add(listName);
         list.appendChild(draggedTask);
 
         // List resizing
         switch (listName) {
-            case 'toDo':
-                toDoListHeight += taskHeight;
-                break;                
-            case 'ongoing':
-                ongoingListHeight += taskHeight;
-                break;                
-            case 'done':
-                doneListHeight += taskHeight;
+            case 'toDo':    toDoListHeight += taskHeight;       break;                
+            case 'ongoing': ongoingListHeight += taskHeight;    break;                
+            case 'done':    doneListHeight += taskHeight;       break;
         }
         resizeLists();
     }
@@ -254,7 +229,7 @@ function dropTask(listName, list) {
  * It creates the delete button for a task
  * @return The new delete button
  */
-function deleteButton() {
+const deleteButton = () => {
     const deleteButton = document.createElement('a');
 
     deleteButton.classList.add('deleteButton');
@@ -266,12 +241,12 @@ function deleteButton() {
 /**
  * It resizes the three lists and their container according to their current content
  */
-function resizeLists() {
+const resizeLists = () => {
     const higherListHeight = Math.max(toDoListHeight, ongoingListHeight, doneListHeight);
 
-    document.getElementById('toDoList').style.height = higherListHeight + 'px';
-    document.getElementById('ongoingList').style.height = higherListHeight + 'px';
-    document.getElementById('doneList').style.height = higherListHeight + 'px';
+    document.querySelectorAll('.listColumn').forEach((list) => {
+        list.style.height = higherListHeight + 'px';
+    });
     
     document.getElementById('listContent').style.height = (higherListHeight + 20) + 'px';
 }
