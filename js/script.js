@@ -5,6 +5,7 @@
  * @version 1.0.0 June 2020
  * @version 1.0.1 July 2021     Code style improvements
  * @version 1.0.2 February 2022 Refactoring
+ * @version 1.0.3 January 2023  Linting and refactoring
  */
 'use strict';
 const addTaskText = 'Add';
@@ -50,7 +51,7 @@ const taskClick = function() {
     currentTask.setAttribute('currentid', ID);
     currentTask.style.display = 'block';
     txtTask.focus();
-}
+};
 
 // Delete a task
 const deleteButtonClick = function(e) {
@@ -62,12 +63,12 @@ const deleteButtonClick = function(e) {
 
     // List height is recalculated
     switch (currentListName) {
-        case 'toDoList':    toDoListHeight -= taskHeight;       break;
-        case 'ongoingList': ongoingListHeight -= taskHeight;    break;
-        case 'doneList':    doneListHeight -= taskHeight;       break;
+    case 'toDoList':    toDoListHeight -= taskHeight;       break;
+    case 'ongoingList': ongoingListHeight -= taskHeight;    break;
+    case 'doneList':    doneListHeight -= taskHeight;       break;
     }
     resizeLists();
-}
+};
 
 // Add or update a task
 document.getElementById('btnOk').addEventListener('click', function() {
@@ -111,14 +112,14 @@ document.getElementById('btnOk').addEventListener('click', function() {
         
         // Recalculate list height
         switch (currentListName) {
-            case 'toDoList':
-                toDoListHeight = toDoListHeight - previousHeight + task.offsetHeight;
-                break;                
-            case 'ongoingList':
-                ongoingListHeight = ongoingListHeight - previousHeight + task.offsetHeight;
-                break;                
-            case 'doneList':
-                doneListHeight = doneListHeight - previousHeight + task.offsetHeight;
+        case 'toDoList':
+            toDoListHeight = toDoListHeight - previousHeight + task.offsetHeight;
+            break;                
+        case 'ongoingList':
+            ongoingListHeight = ongoingListHeight - previousHeight + task.offsetHeight;
+            break;                
+        case 'doneList':
+            doneListHeight = doneListHeight - previousHeight + task.offsetHeight;
         }
     }
     resizeLists();
@@ -134,7 +135,7 @@ const cancelTaskEdition = () => {
     
     currentTask.setAttribute('currentid', '0');
     currentTask.style.display = 'none';
-}
+};
 document.getElementById('btnCancel').addEventListener('click', () => cancelTaskEdition());
 document.getElementById('txtTask').addEventListener('keyup', (e) => (e.code === 'Escape' ? cancelTaskEdition() : true));
 
@@ -156,7 +157,7 @@ btnClose.addEventListener('keyup', (e) => (e.code === 'Escape' ? hideHelp() : tr
 const dragStart = (e) => {
     e.dataTransfer.setData('text/plain', null);
     draggedTask = e.target;
-}
+};
 
 // This affects toDoList, ongoingList and doneList
 document.querySelectorAll('.listColumn').forEach((list) => {
@@ -199,31 +200,31 @@ const dropTask = (listName, list) => {
 
         // Move the task here
         switch (taskList) {
-            case 'toDoList':
-                draggedTask.classList.remove('toDo');
-                toDoListHeight -= taskHeight;
-                break;
-            case 'ongoingList':
-                draggedTask.classList.remove('ongoing');            
-                ongoingListHeight -= taskHeight;
-                break;
-            case 'doneList':
-                draggedTask.classList.remove('done');
-                doneListHeight -= taskHeight;
-                break;
+        case 'toDoList':
+            draggedTask.classList.remove('toDo');
+            toDoListHeight -= taskHeight;
+            break;
+        case 'ongoingList':
+            draggedTask.classList.remove('ongoing');            
+            ongoingListHeight -= taskHeight;
+            break;
+        case 'doneList':
+            draggedTask.classList.remove('done');
+            doneListHeight -= taskHeight;
+            break;
         }
         draggedTask.classList.add(listName);
         list.appendChild(draggedTask);
 
         // List resizing
         switch (listName) {
-            case 'toDo':    toDoListHeight += taskHeight;       break;                
-            case 'ongoing': ongoingListHeight += taskHeight;    break;                
-            case 'done':    doneListHeight += taskHeight;       break;
+        case 'toDo':    toDoListHeight += taskHeight;       break;                
+        case 'ongoing': ongoingListHeight += taskHeight;    break;                
+        case 'done':    doneListHeight += taskHeight;       break;
         }
         resizeLists();
     }
-}
+};
 
 /**
  * It creates the delete button for a task
@@ -236,7 +237,7 @@ const deleteButton = () => {
     deleteButton.addEventListener('click', deleteButtonClick);
 
     return (deleteButton);
-}
+};
 
 /**
  * It resizes the three lists and their container according to their current content
@@ -249,4 +250,4 @@ const resizeLists = () => {
     });
     
     document.getElementById('listContent').style.height = (higherListHeight + 20) + 'px';
-}
+};
