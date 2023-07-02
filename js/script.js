@@ -8,9 +8,10 @@
  * @version 1.0.3 January 2023  Linting and refactoring
  */
 'use strict';
+
 const addTaskText = 'Add';
 const updateTaskText = 'Update';
-const toDoList = document.getElementById('toDoList');
+const toDoList = document.querySelector('#toDoList');
 let draggedTask = {};
 
 // These variables will be updated every time a task is added, edited, deleted, or if it switches lists.
@@ -21,20 +22,20 @@ let doneListHeight = 0;
 
 // Value initialization on page load
 document.addEventListener('DOMContentLoaded', () => {    
-    const currentTask = document.getElementById('currentTask');
+    const currentTask = document.querySelector('#currentTask');
 
     currentTask.setAttribute('currentid', '');   // ID of the task being edited
     currentTask.setAttribute('lastid', '0');     // Highest task ID
 });
 
 // Edit a new task
-document.getElementById('addTask').addEventListener('click', () => {
-    const currentTask = document.getElementById('currentTask');
-    const txtTask = document.getElementById('txtTask');
+document.querySelector('#addTask').addEventListener('click', () => {
+    const currentTask = document.querySelector('#currentTask');
+    const txtTask = document.querySelector('#txtTask');
     const newID = parseInt(currentTask.getAttribute('lastid')) + 1;    
 
     txtTask.value = '';
-    document.getElementById('btnOk').value = addTaskText;
+    document.querySelector('#btnOk').value = addTaskText;
     currentTask.setAttribute('currentid', newID);
     currentTask.style.display = 'block';
     txtTask.focus();
@@ -42,11 +43,11 @@ document.getElementById('addTask').addEventListener('click', () => {
 
 // Edit an existing task
 const taskClick = function() {
-    const currentTask = document.getElementById('currentTask');
-    const txtTask = document.getElementById('txtTask');
+    const currentTask = document.querySelector('#currentTask');
+    const txtTask = document.querySelector('#txtTask');
     const ID = parseInt(this.getAttribute('taskId'));
     
-    document.getElementById('btnOk').value = updateTaskText;
+    document.querySelector('#btnOk').value = updateTaskText;
     txtTask.value = this.innerText;
     currentTask.setAttribute('currentid', ID);
     currentTask.style.display = 'block';
@@ -71,9 +72,9 @@ const deleteButtonClick = function(e) {
 };
 
 // Add or update a task
-document.getElementById('btnOk').addEventListener('click', function() {
-    const taskText = document.getElementById('txtTask');
-    const currentTask = document.getElementById('currentTask');
+document.querySelector('#btnOk').addEventListener('click', function() {
+    const taskText = document.querySelector('#txtTask');
+    const currentTask = document.querySelector('#currentTask');
     
     if (taskText.value.trim() === '') {
         alert('Please insert some text');
@@ -131,23 +132,23 @@ document.getElementById('btnOk').addEventListener('click', function() {
 
 // Cancel task edition
 const cancelTaskEdition = () => {
-    const currentTask = document.getElementById('currentTask');
+    const currentTask = document.querySelector('#currentTask');
     
     currentTask.setAttribute('currentid', '0');
     currentTask.style.display = 'none';
 };
-document.getElementById('btnCancel').addEventListener('click', () => cancelTaskEdition());
-document.getElementById('txtTask').addEventListener('keyup', (e) => (e.code === 'Escape' ? cancelTaskEdition() : true));
+document.querySelector('#btnCancel').addEventListener('click', () => cancelTaskEdition());
+document.querySelector('#txtTask').addEventListener('keyup', (e) => (e.code === 'Escape' ? cancelTaskEdition() : true));
 
 // Show help
-document.getElementById('showHelp').addEventListener('click', () => {
-    document.getElementById('help').style.display = 'block';
-    document.getElementById('btnClose').focus();
+document.querySelector('#showHelp').addEventListener('click', () => {
+    document.querySelector('#help').style.display = 'block';
+    document.querySelector('#btnClose').focus();
 });
 
 // Close help
-const hideHelp = () => document.getElementById('help').style.display = 'none';
-const btnClose = document.getElementById('btnClose');
+const hideHelp = () => document.querySelector('#help').style.display = 'none';
+const btnClose = document.querySelector('#btnClose');
 btnClose.addEventListener('click', hideHelp);
 btnClose.addEventListener('keyup', (e) => (e.code === 'Escape' ? hideHelp() : true));    
 
@@ -165,22 +166,22 @@ document.querySelectorAll('.listColumn').forEach((list) => {
 });
 
 // Drop a task on the to do list
-document.getElementById('toDoList').addEventListener('drop', function() {
+document.querySelector('#toDoList').addEventListener('drop', function() {
     dropTask('toDo', this);
         
     // Move the add task button to the end
-    const addTask = document.getElementById('addTask');
+    const addTask = document.querySelector('#addTask');
     toDoList.removeChild(addTask);
     toDoList.appendChild(addTask);        
 });
 
 // Drop a task on the ongoing list
-document.getElementById('ongoingList').addEventListener('drop', function() {
+document.querySelector('#ongoingList').addEventListener('drop', function() {
     dropTask('ongoing', this);
 });
 
 // Drop a task on the done list
-document.getElementById('doneList').addEventListener('drop', function() {
+document.querySelector('#doneList').addEventListener('drop', function() {
     dropTask('done', this);
 });
 
@@ -249,5 +250,5 @@ const resizeLists = () => {
         list.style.height = higherListHeight + 'px';
     });
     
-    document.getElementById('listContent').style.height = (higherListHeight + 20) + 'px';
+    document.querySelector('#listContent').style.height = (higherListHeight + 20) + 'px';
 };

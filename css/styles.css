@@ -156,7 +156,7 @@ textarea#txtTask {
     border-color: var(--colorSecondary);
 }
 
-input[type="button"] {
+input[type=button] {
     padding: 0.25rem 1rem;
     font-size: 1rem;
     font-weight: bold;
