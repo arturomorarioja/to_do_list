@@ -6,6 +6,7 @@
  * @version 1.0.1 July 2021     Code style improvements
  * @version 1.0.2 February 2022 Refactoring
  * @version 1.0.3 January 2023  Linting and refactoring
+ * @version 1.0.4 January 2024  Refactoring
  */
 'use strict';
 
@@ -21,12 +22,10 @@ let ongoingListHeight = 0;
 let doneListHeight = 0;
 
 // Value initialization on page load
-document.addEventListener('DOMContentLoaded', () => {    
-    const currentTask = document.querySelector('#currentTask');
+const currentTask = document.querySelector('#currentTask');
 
-    currentTask.setAttribute('currentid', '');   // ID of the task being edited
-    currentTask.setAttribute('lastid', '0');     // Highest task ID
-});
+currentTask.setAttribute('currentid', '');   // ID of the task being edited
+currentTask.setAttribute('lastid', '0');     // Highest task ID
 
 // Edit a new task
 document.querySelector('#addTask').addEventListener('click', () => {
