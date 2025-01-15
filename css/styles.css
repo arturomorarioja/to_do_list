@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
-
 :root {
     --colorTextSecondary: floralwhite;
 
@@ -11,25 +10,28 @@
     --colorOngoing: palegoldenrod;
     --colorDone: lightgreen;
 
+    --fontMain: 'Raleway', Arial, Helvetica, sans-serif;
+
     --imgDelete: url(../img/trash.png);
 }
 
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    font-family: var(--fontMain);
 }
 
 header {
     padding: 0.5rem 0 0.5rem 0.5rem;
     color: var(--colorTextSecondary);
     background-color: var(--colorPrimary);
-}
-header > h1 {
-    text-indent: 2rem;   
+    h1 {
+        text-indent: 2rem;   
+    }
 }
 
 main {
@@ -74,7 +76,9 @@ div#doneList {
     width: 33%;
 }
 
-main#listContent {
+#listContent {
+    padding: 0.5rem;
+    line-height: 1.4rem;
     margin-bottom: 2rem;
     border-radius: 0 0 0.5rem 0.5rem;
     padding-right: 0;
@@ -87,32 +91,32 @@ a {
     background-color: var(--colorTextSecondary);
     text-align: center;    
     border-radius: 0.25rem;
-}
-a:hover {
-    cursor: pointer;
-    background-color: var(--colorTertiary);
-}
-a#addTask {
-    display: inline-block;
-    width: 95%;
-    border-radius: 0.25rem;
-    font-size: 3rem;
-    line-height: 2rem;
-}
-a#showHelp {
-    display: block;
-    float: right;
-    margin-right: 1rem;
-    padding: 0.5rem;
-    font-size: 1.2rem;    
-}
-a.deleteButton {
-    display: block;
-    float: right;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-left: 0.25rem;
-    background-image: var(--imgDelete);
+    &:hover {
+        cursor: pointer;
+        background-color: var(--colorTertiary);
+    }
+    &#addTask {
+        display: inline-block;
+        width: 95%;
+        border-radius: 0.25rem;
+        font-size: 3rem;
+        line-height: 2rem;
+    }
+    &#showHelp {
+        display: block;
+        float: right;
+        margin-right: 1rem;
+        padding: 0.5rem;
+        font-size: 1.2rem;    
+    }
+    &.deleteButton {
+        display: block;
+        float: right;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 0.25rem;
+        background-image: var(--imgDelete);
+    }
 }
 
 div.modal {
@@ -128,14 +132,12 @@ div.modal {
     left: 10%;
     background-color: var(--colorTextSecondary);
 }
-@media (min-width: 768px) {
-    div#task {
+div#task {
+    @media (min-width: 768px) {
         width: 60%;
         left: 20%;
     }
-}
-@media (max-height: 480px) {
-    div#task {
+    @media (max-height: 480px) {
         height: 60%;
     }
 }

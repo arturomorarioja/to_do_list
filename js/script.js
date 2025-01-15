@@ -63,9 +63,9 @@ const deleteButtonClick = function(e) {
 
     // List height is recalculated
     switch (currentListName) {
-    case 'toDoList':    toDoListHeight -= taskHeight;       break;
-    case 'ongoingList': ongoingListHeight -= taskHeight;    break;
-    case 'doneList':    doneListHeight -= taskHeight;       break;
+        case 'toDoList':    toDoListHeight -= taskHeight;       break;
+        case 'ongoingList': ongoingListHeight -= taskHeight;    break;
+        case 'doneList':    doneListHeight -= taskHeight;       break;
     }
     resizeLists();
 };
