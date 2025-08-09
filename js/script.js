@@ -1,7 +1,7 @@
 /**
  * To Do List - JavaScript functionality
  * 
- * @author  Arturo Mora-Rioja (amri@kea.dk)
+ * @author  Arturo Mora-Rioja
  * @version 1.0.0 June 2020
  * @version 1.0.1 July 2021     Code style improvements
  * @version 1.0.2 February 2022 Refactoring
